@@ -53,6 +53,18 @@ public class User {
         this.age = age;
     }
 
+    public int getMoney() {
+        return this.wallet.getBalance();
+    }
+
+    private int getPrivateMoney() {
+        return 100;
+    }
+
+    public int getTotalMoney() {
+        return getPrivateMoney() + wallet.getBalance();
+    }
+
 
      class Wallet {
         private int balance;
@@ -60,6 +72,10 @@ public class User {
         public int getBalance() {
             return balance;
         }
+
+         public int getBalance(Object object) {
+             return balance;
+         }
 
         public void setBalance(int balance) {
             this.balance = balance;
