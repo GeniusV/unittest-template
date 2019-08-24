@@ -65,6 +65,12 @@ public class User {
         return getPrivateMoney() + wallet.getBalance();
     }
 
+    public Car buildCar() {
+        Car car = new Car(0);
+//        car.setPrice(0);
+        return car;
+    }
+
 
      class Wallet {
         private int balance;
@@ -80,6 +86,10 @@ public class User {
         public void setBalance(int balance) {
             this.balance = balance;
         }
+    }
+
+    public Car byCar() {
+        return Car.createCar();
     }
 }
 
