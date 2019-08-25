@@ -1,3 +1,3 @@
 ## Hello Unittest
 
-This is a collection of common unittest scripts.
+This is a collection of common mock unittest scripts.
