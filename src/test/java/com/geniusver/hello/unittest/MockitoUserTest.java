@@ -1,24 +1,21 @@
 package com.geniusver.hello.unittest;
 
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.powermock.api.mockito.PowerMockito.when;
+
 
 /**
  * Created by GeniusV on 2019-08-11.
  */
-
-// for junit 5
-@ExtendWith(MockitoExtension.class)
-class MockitoUserTest {
+public class MockitoUserTest {
 
     @Mock
     User.Wallet mockWallet;
@@ -27,19 +24,36 @@ class MockitoUserTest {
     User user;
 
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void testNormalUser() {
+    public void testNormalUser() {
         when(mockWallet.getBalance()).thenReturn(2);
 
         String res = user.toString();
         assertNotNull(res);
+        assertEquals(user.getMoney(), 2);
         System.out.println(res);
 
+    }
+
+    @Test
+    public void testMultiReturn() {
+        when(mockWallet.getBalance()).thenReturn(1).thenReturn(2).thenReturn(3);
+
+        assertEquals(1, user.getMoney());
+        assertEquals(2, user.getMoney());
+        assertEquals(3, user.getMoney());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testException() {
+        when(mockWallet.getBalance()).thenThrow(new UnsupportedOperationException());
+
+        user.getMoney();
     }
 
 
